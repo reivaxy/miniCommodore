@@ -22,16 +22,52 @@ module base() {
 module monitor() {
   translate([0, -0.5, -4.5])
     difference() {
-      scale([1.1, 1, 1.4]) {
+      scale([1.2, 1, 1.4]) {
         *import(file="sources/monitor_frame.stl");
         import(file="sources/monitor.stl");
       }
-      translate([-15, 3.4, 15])
-        cube([30, 8, 27]);
-    translate([0, 0.2, 44])
-      scale([1.01, 1.01, 1])
-        #screen1();
+      // Oled space
+      translate([-15, 3.4, 16])
+        cube([30, 12, 27]);
+      // sensor space
+      translate([-15, 12, 15])
+        cube([30, 10, 26]);
+      
+      // space for screen connection
+      translate([-8, 5, 43])
+        cube([16, 3, 2]);
+      
+      slit(0);
+      slit(2);
+      slit(4);
+      slit(6);
+      slit(8);
+      
+      // Screen cut on top
+      #translate([0, 0.2, 44.5])
+        scale([1.02, 1.02, 1])
+          screen1();
     }
+    // pillar sensor
+    translate([-10, 22, 32]) {
+      rotate(90, [1, 0, 0]) {
+        cylinder(d=2.5, h=5, $fn=50);    
+      }
+    }
+    // pillar sensor
+    translate([10, 22, 32]) {
+      rotate(90, [1, 0, 0]) {
+        cylinder(d=2.5, h=5, $fn=50);    
+      }
+    }
+}
+
+module slit(x) {
+  translate([-0.3 + x, 18, 30])
+    cube([0.6, 10, 20]);
+  translate([-0.3 - x, 18, 30])
+    cube([0.6, 10, 20]);
+  
 }
 
 module body() {
