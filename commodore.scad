@@ -2,9 +2,9 @@
 use <oledPanel.scad>;
 
 translate([0, 0, 10]) {
-  *body();
+  body();
   *base();
-  monitor();
+  *monitor();
   *import(file="sources/keys.stl");
 }
 
@@ -28,14 +28,15 @@ module monitor() {
       }
       // Oled space
       translate([-15, 3.4, 16])
-        cube([30, 12, 27]);
+        cube([30, 7, 27]);
+
       // sensor space
-      translate([-15, 12, 15])
-        cube([30, 10, 26]);
+      translate([-15, 7, 14])
+        cube([30, 15, 26]);
       
       // space for screen connection
       translate([-8, 5, 43])
-        cube([16, 3, 2]);
+        cube([16, 3, 1.5]);
       
       slit(0);
       slit(2);
@@ -44,18 +45,19 @@ module monitor() {
       slit(8);
       
       // Screen cut on top
-      #translate([0, 0.2, 44.5])
-        scale([1.02, 1.02, 1])
+      translate([0, -1, 44])
+        scale([1.02, 1.2, 1])
+          color("red")
           screen1();
     }
     // pillar sensor
-    translate([-10, 22, 32]) {
+    translate([-11.5, 22, 32]) {
       rotate(90, [1, 0, 0]) {
         cylinder(d=2.5, h=5, $fn=50);    
       }
     }
     // pillar sensor
-    translate([10, 22, 32]) {
+    translate([11.5, 22, 32]) {
       rotate(90, [1, 0, 0]) {
         cylinder(d=2.5, h=5, $fn=50);    
       }
@@ -64,9 +66,9 @@ module monitor() {
 
 module slit(x) {
   translate([-0.3 + x, 18, 30])
-    cube([0.6, 10, 20]);
+    cube([1, 10, 20]);
   translate([-0.3 - x, 18, 30])
-    cube([0.6, 10, 20]);
+    cube([1, 10, 20]);
   
 }
 
