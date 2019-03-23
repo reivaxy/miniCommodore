@@ -2,9 +2,9 @@
 use <oledPanel.scad>;
 
 translate([0, 0, 10]) {
-  body();
+  *body();
   *base();
-  *monitor();
+  monitor();
   *import(file="sources/keys.stl");
 }
 
@@ -81,7 +81,7 @@ module monitorFrame() {
           cube([x, y, 4]);
           cylinder(d=4, h=4, $fn=80);
         }
-    translate([0, 2.5, 22.9])
+    *translate([0, 2.5, 22.9])
       rotate(90, [1, 0, 0])
         linear_extrude(height=5, scale=1.7)
         translate([-(x + 0)/2, -y/2 + 0.8, 0])
@@ -104,12 +104,17 @@ module body() {
   bodyOpeningX = 26.4;
   difference() {
     import(file="sources/body.stl");
-    // top opening
+    // top front opening
     translate([-bodyOpeningX/2, 3, -4])
-      cube([bodyOpeningX, 20, 25]);
+      cube([bodyOpeningX, 18.5, 25]);
+    // top back opening
+    translate([-bodyOpeningX/2, 3, -2])
+      cube([bodyOpeningX, 21, 12.5]);
+
+
     // Usb
-    translate([-5, 3, -2])
-      cube([10, 22.5, 5]);
+    translate([-5, 3, -1])
+      cube([10, 22.5, 5.5]);
 
     translate([-bodyOpeningX/2, -12, -4])
       cube([bodyOpeningX, 22, 4]);
