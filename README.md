@@ -5,6 +5,7 @@ What it does depends on what you flash in it.
 
 Prototype features a temperature/pressure/humidity sensor.
 
+<img src="https://raw.githubusercontent.com/reivaxy/miniCommodore/master/resources/20190321_224756.jpg" width="500"/>
 
 Roadmap:
 
