@@ -45,9 +45,9 @@ module monitor() {
       slit(6);
       slit(8);
       
-      // Screen cut on top
-      translate([0, -1, 44])
-        scale([1.02, 1.2, 1])
+      // Screen cut on top to hold oled screen
+      translate([0, -2.2, 44])
+        scale([1.02, 1.5, 1])
           color("red")
           screen1();
     }
@@ -79,7 +79,7 @@ module monitorFrame() {
       rotate(90, [1, 0, 0])
         minkowski() {
           cube([x, y, 4]);
-          cylinder(d=4, h=4, $fn=80);
+          cylinder(d=3.5, h=4, $fn=80);
         }
     *translate([0, 2.5, 22.9])
       rotate(90, [1, 0, 0])
@@ -106,23 +106,29 @@ module body() {
     import(file="sources/body.stl");
     // top front opening
     translate([-bodyOpeningX/2, 3, -4])
-      cube([bodyOpeningX, 18.5, 25]);
+      cube([bodyOpeningX, 18, 25]);
     // top back opening
-    translate([-bodyOpeningX/2, 3, -2])
-      cube([bodyOpeningX, 21, 12.5]);
+    translate([-bodyOpeningX/2, 3, -0.5])
+      cube([bodyOpeningX, 21, 11]);
 
 
     // Usb
-    translate([-5, 3, -1])
+    translate([-5, 3, -0.5])
       cube([10, 22.5, 5.5]);
 
-    translate([-bodyOpeningX/2, -12, -4])
-      cube([bodyOpeningX, 22, 4]);
+    // Bottom opening
     translate([-bodyOpeningX/2, -11, -4])
+      cube([bodyOpeningX, 22, 4]);
+
+    // upper keyboard
+    translate([-bodyOpeningX/2, -6.1, -1])
       rotate(13, [1, 0, 0])
         cube([bodyOpeningX, 22, 4]);
-    translate([-bodyOpeningX/2, -6, -1])
+
+    // Lower keyboard
+    translate([-bodyOpeningX/2, -10, -4.5])
       rotate(13, [1, 0, 0])
-        cube([bodyOpeningX, 11, 4]);
+        cube([bodyOpeningX, 22, 4]);
+
   }
 }
