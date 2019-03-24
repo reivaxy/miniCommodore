@@ -147,7 +147,6 @@ module screen1() {
   }
 }
 
-
 module slit(x) {
   translate([-0.3 + x, 18, 30])
     cube([1, 10, 20]);
