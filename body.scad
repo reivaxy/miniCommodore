@@ -4,8 +4,8 @@ module body() {
   difference() {
     import(file="sources/body.stl");
     // Hollow out
-    translate([0, 0, 0.2]) {
-      scale(hollowRatio) {
+    translate([0, 1, 0.3]) {
+      scale([hollowRatio, hollowRatio, 0.90]) {
         difference() {
           import(file="sources/body.stl");
           // Remove keyboard from hollowing reduced body
@@ -21,9 +21,9 @@ module body() {
       cube([bodyTopOpeningX, bodyTopOpeningY, 3]);
     }
 
-    // body bottom opening
-    translate([-bodyBotOpeningX/2, -bodyBotOpeningY/2 + 1, -5]) {
-      cube([bodyBotOpeningX, bodyBotOpeningY, 3]);
+    // under keyboard bottom opening
+    translate([-bodyBotOpeningX/2, -bodyBotOpeningY/2 + 15, -5]) {
+      cube([bodyBotOpeningX, bodyBotOpeningY - 15, 4]);
     }
 
     // Under keyboard
@@ -33,10 +33,16 @@ module body() {
       }
     }
     
+    // Usb
+    translate([-12.7, 3, -1])
+      cube([10, 22.5, 5.5]);
+    
   }
+  
   *translate([5, -10, -5])
-  rotate([0, 180, 0])
-  rotate([-90, 0, 0])
-  import(file="esp.stl");
+    rotate([0, 180, 0])
+      rotate([-90, 0, 0])
+        import(file="esp.stl");
   
 }
+

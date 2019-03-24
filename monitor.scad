@@ -7,56 +7,54 @@ module monitor(frame) {
   translate([0, -0.5, -4.5]) {
     difference() {
       scale([1.2, 1, 1.4]) {
-        if(frame > 0) {
-          translate([0, -0.2, 0]) {
-            monitorFrame();
-          }
-        }
-        // Top screen support
-        if(frame != 1) {
-          translate([-15, 4, 29.9]) {
-            difference() {
-              cube([30, 14, 2.2]);
-              // wire passage
-              translate([(30-14)/2, -1, -1]) {
-                cube([14, 18, 5]);
-              }
-              // Cut top
-              translate([-1, 2, 2.2]) {
-                rotate([-11, 0, 0])
-                  cube([32, 14, 3]);
-              }
-            }
-          }
-        }
-        if(frame != 1) {
-          difference() {
-            import(file="sources/monitor.stl");
-            translate([0, -1, 1.3]) {
+          cube(0); // for frame == 1, need a node 
+          // Top screen support
+          if(frame != 1) {
+            translate([-15, 5.5, 29.9]) {
               difference() {
-                scale([hollowRatio, 1.01, hollowRatio]) {
-                  import(file = "sources/monitor.stl");
+                cube([30, 14, 2.2]);
+                // wire passage
+                translate([(30-14)/2, -1, -1]) {
+                  cube([14, 18, 5]);
                 }
-                // Remove front of scaled down monitor
-                translate([-25, -5, 7]) {
-                  cube([50, 9, 30]);
+                // Cut top
+                translate([-1, 2, 2.2]) {
+                  rotate([-11, 0, 0])
+                    cube([32, 14, 3]);
                 }
-                // Bottom front removal
-                translate([-25, -4, 7]) {
-                  cube([50, 9, 6]);
-                }
-                
-                bottomLowerCorner();
-                mirror([1, 0, 0]) {
+              }
+            }
+          }
+          // Monitor hollowed out
+          if(frame != 1) {
+            difference() {
+              import(file="sources/monitor.stl");
+              // Scaled down monitor to subtract
+              translate([0, -1, 1.3]) {
+                difference() {
+                  scale([hollowRatio, 1.01, hollowRatio]) {
+                    import(file = "sources/monitor.stl");
+                  }
+                  // Remove front of scaled down monitor
+                  translate([-25, -5, 7]) {
+                    cube([50, 9, 30]);
+                  }
+                  // Bottom front removal
+                  translate([-25, -4.5, 7]) {
+                    cube([50, 9, 6]);
+                  }
+                  
+                  // bottom corners to hold frame
                   bottomLowerCorner();
+                  mirror([1, 0, 0]) {
+                    bottomLowerCorner();
+                  }
+    
                 }
-  
               }
             }
           }
         }
-      }
-      
       // bottom opening
       translate([-monitorBotOpeningX/2, 13 - monitorBotOpeningY/2, 15]) {
         cube([monitorBotOpeningX, monitorBotOpeningY, 3]);
@@ -69,14 +67,20 @@ module monitor(frame) {
       slit(8);
 
     }
+    if(frame > 0) {
+      translate([0, -0.2, 0]) {
+        monitorFrame();
+      }
+    }
   }
+  
+  // Pillars must not be scaled !
   if(frame != 1) {
-    translate([0, 4, 38.2])
+    translate([0, 5, 38.5])
       screenPillars();
   }
   
-  *translate([0, 0.2, 39.5])
-    screen1();
+  *screen1();
 }
 
 module bottomLowerCorner() {
@@ -88,46 +92,59 @@ module bottomLowerCorner() {
 module screenPillars() {
   translate([-11.5, 0, 0]) {
     rotate(90, [1, 0, 0]) {
-      cylinder(d=1.6, h=3, $fn=50);
-      translate([23.5, 0, 0]) {
-        cylinder(d=1.6, h=3, $fn=50);
+      cylinder(d=1.6, h=4, $fn=50);
+      translate([23, 0, 0]) {
+        cylinder(d=1.6, h=4, $fn=50);
       }
     }
   }
 }
 
 module monitorFrame() {
-  x = 17.5;
-  y = 7.5;
+  oledX = 26.4;
+  oledY = 12.5;
+  diam = 4;
+  
   difference() {
-    scale([1, 0.8, 1])
-    union() {
-      import(file="sources/monitor_frame.stl");
-      translate([-13, 0.95, 16.5])
-        cube([26, 2.5, 15]);
+    scale([1.2, 1, 1.4]) {
+      union() {
+        import(file="sources/monitor_frame.stl");
+        translate([-13, 0.95, 16.5])
+          cube([26, 2.5, 15]);
+      }
     }
-    translate([-x/2, 6, 20])
-      rotate(90, [1, 0, 0])
+    
+    // Oled opening must not be scaled
+    translate([-(oledX -diam)/2, 6, 29]) {
+      rotate(90, [1, 0, 0]) {
         minkowski() {
-          cube([x, y, 4]);
-          cylinder(d=4, h=4, $fn=80);
+          cube([oledX - diam, oledY - diam, 4]);
+          cylinder(d=diam, h=4, $fn=80);
         }
+      }
+    }
+    
     *translate([0, 2.5, 22.9])
-      rotate(90, [1, 0, 0])
-        linear_extrude(height=5, scale=1.7)
-        translate([-(x + 0)/2, -y/2 + 0.8, 0])
+      rotate(90, [1, 0, 0]) {
+        linear_extrude(height=5, scale=1.7) {
+        translate([-(x + 0)/2, -y/2 + 0.8, 0]) {
           minkowski() {
             square([x, y]);
             //polygon([[0, 0], [x + 2, 0], [x + 0.5, y], [1.5, y]]);
             circle(d=4, $fn=80);
           }
+        }
+      }
+    }     
   }
 }
 
 module screen1() {
-  translate([-14, 3, 1])
-    rotate(-90, [1, 0, 0])
-      screen();
+  translate([-13.6, 15, 40.7]) {
+    rotate(180, [1, 0, 0]) {
+      import(file="oled.stl");
+    }
+  }
 }
 
 
