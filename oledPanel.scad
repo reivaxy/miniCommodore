@@ -100,7 +100,7 @@ module screen() {
 }
 
 module hole(x, y, xMargin, yMargin, z) {
-  *translate([x + xMargin/2, y + yMargin/2, -0.1]) {
+  translate([x + xMargin/2, y + yMargin/2, -0.1]) {
     cylinder(d=1.9, h = z+0.2, $fn=20);
   }
   

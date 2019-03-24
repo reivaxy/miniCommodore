@@ -10,7 +10,7 @@ module body() {
           import(file="sources/body.stl");
           // Remove keyboard from hollowing reduced body
           translate([-25, -29, -4]) {
-            cube([50, 23, 8]);
+            cube([50, 22, 8]);
           }
         }
       }
@@ -27,11 +27,16 @@ module body() {
     }
 
     // Under keyboard
-    translate([-bodyBotOpeningX/2, -bodyBotOpeningY/2 + 1, -7.8]) {
+    translate([-bodyBotOpeningX/2, -bodyBotOpeningY/2 + 1, -7.4]) {
       rotate(14, [1, 0, 0]) {
         cube([bodyBotOpeningX, 15, 5]);
       }
     }
     
   }
+  *translate([5, -10, -5])
+  rotate([0, 180, 0])
+  rotate([-90, 0, 0])
+  import(file="esp.stl");
+  
 }

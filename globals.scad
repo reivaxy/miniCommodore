@@ -7,5 +7,5 @@ bodyTopOpeningY = 17;
 bodyBotOpeningX = 40;
 bodyBotOpeningY = 40;
 
-monitorBotOpeningX = bodyTopOpeningX;
-monitorBotOpeningY = bodyTopOpeningY;
+monitorBotOpeningX = bodyTopOpeningX-1;
+monitorBotOpeningY = bodyTopOpeningY-1;

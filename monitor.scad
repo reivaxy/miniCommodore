@@ -6,51 +6,55 @@ module monitor() {
   translate([0, -0.5, -4.5]) {
     difference() {
       scale([1.2, 1, 1.4]) {
-        *translate([0, -0.2, 0])
-          *monitorFrame();
-        difference() {
+        translate([0, -0.2, 0]) {
+          monitorFrame();
+        }
+        // Top screen support
+        *translate([-15, 4, 29.9]) {
+          difference() {
+            cube([30, 14, 2.2]);
+            // wire passage
+            translate([(30-14)/2, -1, -1]) {
+              cube([14, 18, 5]);
+            }
+            // Cut top
+            translate([-1, 2, 2.2]) {
+              rotate([-11, 0, 0])
+                cube([32, 14, 3]);
+            }
+          }
+        }
+        *difference() {
           import(file="sources/monitor.stl");
-          translate([0, 0.5, 1.3]) {
+          translate([0, -1, 1.3]) {
             difference() {
-              scale(hollowRatio) {
+              scale([hollowRatio, 1.01, hollowRatio]) {
                 import(file = "sources/monitor.stl");
               }
-              translate([-25, -6.5, 7]) {
-                cube([50, 10, 30]);
+              // Remove front of scaled down monitor
+              translate([-25, -5, 7]) {
+                cube([50, 9, 30]);
               }
+              // Bottom front removal
+              translate([-25, -4, 7]) {
+                cube([50, 9, 6]);
+              }
+              
+              bottomLowerCorner();
+              mirror([1, 0, 0]) {
+                bottomLowerCorner();
+              }
+
             }
           }
         }
       }
-        
-      // Oled space
-      translate([-15, 3.4, 22]) {
-        cube([30, 7, 21]);
-      }
       
       // bottom opening
-      translate([-monitorBotOpeningX/2, 4.5, 15]) {
+      translate([-monitorBotOpeningX/2, 13 - monitorBotOpeningY/2, 15]) {
         cube([monitorBotOpeningX, monitorBotOpeningY, 3]);
       }
-        
-      
-        /*
-        // sensor space
-        translate([-15, 7, 14])
-          cube([30, 15, 26]);
-        
-        // space for screen connection
-        translate([-8, 5, 43])
-          cube([16, 3, 1.5]);
-  
-              
-        // Screen cut on top
-        translate([0, -1, 44])
-          scale([1.02, 1.2, 1])
-            color("red")
-            screen1();
-        */
-        
+               
       slit(0);
       slit(2);
       slit(4);
@@ -58,18 +62,28 @@ module monitor() {
       slit(8);
 
     }
-/*    // pillar sensor
-    *translate([-11.5, 22, 32]) {
-      rotate(90, [1, 0, 0]) {
-        cylinder(d=2.5, h=5, $fn=50);    
+  }
+  translate([0, 4, 38.2])
+    screenPillars();
+  
+  *translate([0, 0.2, 39.5])
+    screen1();
+}
+
+module bottomLowerCorner() {
+  translate([-22, -2, 12.7]) {
+    rotate([0, 0, 30])
+      cube([10, 16, 4.5]);
+  }
+}
+module screenPillars() {
+  translate([-11.5, 0, 0]) {
+    rotate(90, [1, 0, 0]) {
+      cylinder(d=1.6, h=3, $fn=50);
+      translate([23.5, 0, 0]) {
+        cylinder(d=1.6, h=3, $fn=50);
       }
     }
-    // pillar sensor
-    *translate([11.5, 22, 32]) {
-      rotate(90, [1, 0, 0]) {
-        cylinder(d=2.5, h=5, $fn=50);    
-      }
-    }*/
   }
 }
 
