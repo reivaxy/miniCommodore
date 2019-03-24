@@ -2,49 +2,56 @@ include<globals.scad>;
  
 use <oledPanel.scad>;
 
-module monitor() {
+// @param frame 0: no frame, 1: frame only, 2: all
+module monitor(frame) {
   translate([0, -0.5, -4.5]) {
     difference() {
       scale([1.2, 1, 1.4]) {
-        translate([0, -0.2, 0]) {
-          monitorFrame();
+        if(frame > 0) {
+          translate([0, -0.2, 0]) {
+            monitorFrame();
+          }
         }
         // Top screen support
-        *translate([-15, 4, 29.9]) {
-          difference() {
-            cube([30, 14, 2.2]);
-            // wire passage
-            translate([(30-14)/2, -1, -1]) {
-              cube([14, 18, 5]);
-            }
-            // Cut top
-            translate([-1, 2, 2.2]) {
-              rotate([-11, 0, 0])
-                cube([32, 14, 3]);
+        if(frame != 1) {
+          translate([-15, 4, 29.9]) {
+            difference() {
+              cube([30, 14, 2.2]);
+              // wire passage
+              translate([(30-14)/2, -1, -1]) {
+                cube([14, 18, 5]);
+              }
+              // Cut top
+              translate([-1, 2, 2.2]) {
+                rotate([-11, 0, 0])
+                  cube([32, 14, 3]);
+              }
             }
           }
         }
-        *difference() {
-          import(file="sources/monitor.stl");
-          translate([0, -1, 1.3]) {
-            difference() {
-              scale([hollowRatio, 1.01, hollowRatio]) {
-                import(file = "sources/monitor.stl");
-              }
-              // Remove front of scaled down monitor
-              translate([-25, -5, 7]) {
-                cube([50, 9, 30]);
-              }
-              // Bottom front removal
-              translate([-25, -4, 7]) {
-                cube([50, 9, 6]);
-              }
-              
-              bottomLowerCorner();
-              mirror([1, 0, 0]) {
+        if(frame != 1) {
+          difference() {
+            import(file="sources/monitor.stl");
+            translate([0, -1, 1.3]) {
+              difference() {
+                scale([hollowRatio, 1.01, hollowRatio]) {
+                  import(file = "sources/monitor.stl");
+                }
+                // Remove front of scaled down monitor
+                translate([-25, -5, 7]) {
+                  cube([50, 9, 30]);
+                }
+                // Bottom front removal
+                translate([-25, -4, 7]) {
+                  cube([50, 9, 6]);
+                }
+                
                 bottomLowerCorner();
+                mirror([1, 0, 0]) {
+                  bottomLowerCorner();
+                }
+  
               }
-
             }
           }
         }
@@ -63,8 +70,10 @@ module monitor() {
 
     }
   }
-  translate([0, 4, 38.2])
-    screenPillars();
+  if(frame != 1) {
+    translate([0, 4, 38.2])
+      screenPillars();
+  }
   
   *translate([0, 0.2, 39.5])
     screen1();
