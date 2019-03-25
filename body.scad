@@ -37,7 +37,7 @@ module body() {
     translate([-12.7, 3, -1])
       cube([10, 22.5, 5.5]);
     
-    // slots for temp sensor
+    // side slots
     for (slot = [0 : 8]) {
       translate([15, 4 + slot*2, -1]) {
         cube([10, 1, 8]);
@@ -45,44 +45,9 @@ module body() {
     }
   }
   
-  weather();
-  
   *translate([5, -10, -5])
     rotate([0, 180, 0])
       rotate([-90, 0, 0])
-        import(file="esp.stl");
+        import(file="espsx.stl");
   
-}
-
-// separator for temperature sensor
-module weather() {
-  translate([7, -20, -2.5]) {
-    difference() {
-      union() {
-        cube([4, 45, 14]);
-        #translate([0, 18, 10]) {
-          cube([15, 26.8, 4]);
-        }
-      }
-      translate([-0.5, 0, 0.8]) {
-        rotate([13, 0, 0]) {
-          cube([5, 14, 14]);
-        }
-      }
-      translate([-0.5, -0.2, 3.2]) {
-        cube([5, 14, 14]);
-      }
-      translate([-0.5, 6.1, 4.2]) {
-        rotate([13, 0, 0]) {
-          cube([5, 13.4, 14]);
-        }
-      }
-      translate([-0.5, 6.1, 12]) {
-        rotate([-13, 0, 0]) {
-          cube([16, 13.4, 14]);
-        }
-      }
-    }
-
-  }
 }
