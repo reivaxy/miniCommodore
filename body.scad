@@ -8,7 +8,7 @@ module body() {
       scale([hollowRatio, 0.93, 0.90]) {
         difference() {
           import(file="sources/body.stl");
-          // Remove keyboard from hollowing reduced body
+          // Remove keyboard from hollowing reduced body to avoid too thin shells
           translate([-25, -29, -4]) {
             cube([50, 22, 8]);
           }
@@ -26,7 +26,7 @@ module body() {
       cube([bodyBotOpeningX, bodyBotOpeningY - 15, 4]);
     }
 
-    // Under keyboard
+    // Under bottom keyboard
     translate([-bodyBotOpeningX/2, -bodyBotOpeningY/2 + 1, -7.4]) {
       rotate(14, [1, 0, 0]) {
         cube([bodyBotOpeningX, 15, 5]);
@@ -37,11 +37,24 @@ module body() {
     translate([-12.7, 3, -1])
       cube([10, 22.5, 5.5]);
     
-    // side slots
+    // right side slots
     for (slot = [0 : 8]) {
-      translate([15, 4 + slot*2, -1]) {
-        cube([10, 1, 8]);
+      translate([21.5, 4 + slot*2, -1]) {
+        cube([3, 1, 8]);
       }
+    }
+    // left side slots
+    for (slot = [0 : 8]) {
+      translate([-24.5, 4 + slot*2, -1]) {
+        cube([3, 1, 8]);
+      }
+    }
+  }
+      
+  // Under top keyboard needs some reinforcement
+  translate([-bodyBotOpeningX/2 - 3, -bodyBotOpeningY/2 + 13, 2.75]) {
+    rotate(14, [1, 0, 0]) {
+      cube([bodyBotOpeningX + 6, 6.2, 0.5]);
     }
   }
   
