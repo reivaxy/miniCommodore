@@ -9,14 +9,5 @@ module base() {
       }
     }
   }
-  
-  // separator for temperature sensor
-  difference() {
-    translate([7, -21, -5.5]) {
-      cube([4, 44, 3.07]);
-    }
-    translate([7, 10, -5.5]) {
-      cube([4, 8, 3.07]);
-    }
-  }
+
 }
