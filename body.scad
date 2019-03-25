@@ -1,6 +1,6 @@
-include<globals.scad>;
+include <globals.scad>;
 
-module body() {
+module body(switches) {
   difference() {
     import(file="sources/body.stl");
     // Hollow out
@@ -26,15 +26,34 @@ module body() {
       cube([bodyBotOpeningX, bodyBotOpeningY - 15, 4]);
     }
 
-    // Under bottom keyboard
-    translate([-bodyBotOpeningX/2, -bodyBotOpeningY/2 + 1, -7.4]) {
-      rotate(14, [1, 0, 0]) {
-        cube([bodyBotOpeningX, 15, 5]);
+    // Under keyboard: if no keyboard switches
+    if(switches < 0) {
+      translate([-bodyBotOpeningX/2, -bodyBotOpeningY/2 + 1, -7.4]) {
+        rotate(14, [1, 0, 0]) {
+          cube([bodyBotOpeningX, 15, 5]);
+        }
       }
+    } else {
+      // Remove key pad 
+      translate([11.8, -18.9, -8]) {
+        rotate(14, [1, 0, 0]) {
+          cube([keyPadHoleX, keyPadHoleY, 10]);
+        }
+      }
+    // Remove main keyboard
+      translate([-22.5, -15.6, -8]) {
+        rotate(14, [1, 0, 0]) {
+          cube([keyboardHoleX, keyboardHoleY, 10]);
+          // spacebar
+          translate([5.6, -3.28, 0]) {
+            cube([spaceBarHoleX, spaceBarHoleY, 10]);
+          }
+        }
+      }    
     }
     
-    // Usb
-    translate([-12.7, 3, -1])
+    // back left usb
+    translate([-11.5, 3, -1])
       cube([10, 22.5, 5.5]);
     
     // right side slots
