@@ -113,7 +113,7 @@ module monitorFrame() {
           translate([-13, 0.95, 16.5])
           cube([26, 2.5, 15]);
         }
-        #translate([-14, 2.6, 10]) {
+        translate([-14, 2.6, 10]) {
           cube([28, 4, 20]);
         }
       }

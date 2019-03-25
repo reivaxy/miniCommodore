@@ -60,7 +60,7 @@ module weather() {
     difference() {
       union() {
         cube([4, 45, 14]);
-        #translate([0, 18, 10]) {
+        translate([0, 18, 10]) {
           cube([15, 26.8, 4]);
         }
       }
