@@ -32,7 +32,7 @@ module keyboard(switch) {
       }
   
       // draw rows
-      *translate([0, -keyInterval, 0])
+      translate([0, -keyInterval, 0])
       for (row = [0 : rowCount]) {
         translate([-keyInterval, row*(keySide + keyInterval), 2]) {
           cube([keyboardX + 50, keyInterval, 5]);
@@ -40,7 +40,7 @@ module keyboard(switch) {
       }
   
       // draw columns
-      *translate([-keyInterval, 0, 0])
+      translate([-keyInterval, 0, 0])
       for (col = [1 : colCount + 5]) {
         if(col > colCount) {
           translate([1.7+keySide/2 + col*(keySide + keyInterval), -keySide-1, 2]) {
