@@ -66,41 +66,42 @@ module kbSupport() {
  }
  
   translate([3, -14.5, -7])  {
-    switchSupport();
+    switchSupport(switchDownZ);
     translate([-24.0, 0, 0])  {
-      switchSupport();
+      switchSupport(switchDownZ);
     }
-    translate([13, 0, 0])  {
-      switchSupport();
+    translate([11.5, 0, 0])  {
+      switchSupport(switchDownZ + 1.5);
     }
   }
   
 }
+switchDownZ = 2.1;
+switchFootZ = 6;
+pinX = 1.8;
+railSide = 2;
 
-module switchSupport() {
-  switchDownZ = 2.1;
-  switchFootZ = 6;
-  pinX = 1.8;
-  railSide = 2;
-  
+module switchSupport(depth) {
   difference() {
     rotate([13, 0, 0]) {
-      difference() {
-        cube([switchFootX, switchFootY, switchFootZ]);
-        // hole for switch
-        translate([(switchFootX - switchX) / 2, (switchFootY - switchY) / 2, switchFootZ - switchDownZ])
-        {
-          cube([switchX, switchY, switchDownZ + 1]);
-        }
-        // slots for switch pins
-      translate([(switchFootX - pinX) / 2, -0.5, switchFootZ - switchDownZ]){
-          cube([pinX, switchFootY + 1, switchDownZ + 1]);
-        }
-      }
-
+      straightSupport(depth);
     }
     // cut bottom
     translate([-10, -10, 0])
       cube([20, 20, 2]);
+  }
+}
+
+module straightSupport(depth) {
+  difference() {
+    cube([switchFootX, switchFootY, switchFootZ]);
+    // hole for switch
+    translate([(switchFootX - switchX) / 2, (switchFootY - switchY) / 2, switchFootZ - depth]) {
+      cube([switchX, switchY, depth + 1]);
+    }
+    // slots for switch pins
+    translate([(switchFootX - pinX) / 2, -0.5, switchFootZ - depth]){
+      cube([pinX, switchFootY + 1, depth + 1]);
+    }
   }
 }
