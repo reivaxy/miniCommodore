@@ -70,7 +70,7 @@ module kbSupport() {
     translate([-24.0, 0, 0])  {
       switchSupport();
     }
-    translate([11.6, 0, 0])  {
+    translate([13, 0, 0])  {
       switchSupport();
     }
   }

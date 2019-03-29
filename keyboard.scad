@@ -23,15 +23,26 @@ module keyboard(switch) {
           tolX = 0.35;
           tolY = 0.5;
           cube([keyPadX, keyPadY, 4]);
-          // numeric keypad foot
-          translate([(keyPadX - switchFootX - 1 - tolX)/2, 
-            (keyPadY - switchFootY - 1.1 - tolY)/2 + 1.4, -3]) {
-            difference() {
-              cube([switchFootX + 1 + tolX, switchFootY + 1 + tolY, 4]);
-              translate([0.5, 0.5, -0.1])
-                cube([switchFootX + tolX, switchFootY + tolY, 4.1]);
-              translate([(switchFootX + 1 + tolX - 2.4) /2, 0, 0])
-                cube([2.4, 10, 4]);
+          // keypad foot
+          difference() {
+            translate([0, 0, -7]) {
+              cube([1, keyPadY, 9]);
+            }
+            // Cut foot horizontally
+            translate([-1, -1, -7.4]) {
+              rotate([-13, 0, 0])
+                cube([keyPadX, keyPadY+2, 4]);
+            }
+          }
+          // foot's foot
+          translate([0, 0, -3.58]) {
+            rotate([-13, 0, 0]) {
+              difference() {
+                cube([keyPadX - 1.8, keyPadY + 2, 1]);
+                translate([3.6, 4, 0]) {
+                  cube([switchFootX * 2, switchFootY +1 , 2]);
+                }
+              }
             }
           }
         }
