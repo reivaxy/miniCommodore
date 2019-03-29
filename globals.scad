@@ -14,7 +14,7 @@ monitorBotOpeningY = bodyTopOpeningY-1;
 keyPadHoleX = 10.25;
 keyPadHoleY = 13.53;
 
-keyboardHoleX = 31.70;
+keyboardHoleX = 31.8;
 keyboardHoleY = 10.25;
 spaceBarHoleX = 20.50;
 spaceBarHoleY = 3.28;
@@ -32,3 +32,8 @@ kbAxleSupportWidth = 1.6;
 kbAxleSupportSpacing = 3.5;
 kbAxleSupportSide = 8;
 kbAxisDiam = 2;
+
+switchX = 4;
+switchY = 6.35;
+switchFootX = switchX + 1;
+switchFootY = switchY + 1.1;

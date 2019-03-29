@@ -20,8 +20,22 @@ module keyboard(switch) {
         }
         // Numeric keypad
         translate([keyboardX + 3.7, -keySide - keyInterval + 0.2, 0]) {
+          tolX = 0.35;
+          tolY = 0.5;
           cube([keyPadX, keyPadY, 4]);
+          // numeric keypad foot
+          translate([(keyPadX - switchFootX - 1 - tolX)/2, 
+            (keyPadY - switchFootY - 1.1 - tolY)/2 + 1.4, -3]) {
+            difference() {
+              cube([switchFootX + 1 + tolX, switchFootY + 1 + tolY, 4]);
+              translate([0.5, 0.5, -0.1])
+                cube([switchFootX + tolX, switchFootY + tolY, 4.1]);
+              translate([(switchFootX + 1 + tolX - 2.4) /2, 0, 0])
+                cube([2.4, 10, 4]);
+            }
+          }
         }
+        
       }
   
       // draw rows
