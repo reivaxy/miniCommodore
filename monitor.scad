@@ -129,15 +129,15 @@ module monitorFrame() {
         }
       }
     }
-    
-    *translate([0, 2.5, 22.9])
+    // inner chamfer for better viewinf from above
+    translate([0, 2.5, 29])
       rotate(90, [1, 0, 0]) {
-        linear_extrude(height=5, scale=1.7) {
-        translate([-(x + 0)/2, -y/2 + 0.8, 0]) {
+        linear_extrude(height=4.5, scale=1.7) {
+        translate([-(oledX-diam)/2, -(oledY-diam)/2 + 4, 0]) {
           minkowski() {
-            square([x, y]);
-            //polygon([[0, 0], [x + 2, 0], [x + 0.5, y], [1.5, y]]);
-            circle(d=4, $fn=80);
+            square([oledX-diam, oledY-diam]);
+            //polygon([[0, 0], [oledX + 2, 0], [oledX + 0.5, oledY], [1.5,oledY]]);
+            circle(d=diam, $fn=80);
           }
         }
       }

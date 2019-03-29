@@ -53,7 +53,11 @@ module body(switches) {
     }
     
     // back left usb
-    translate([-11.5, 3, -1])
+    *translate([-11.5, 3, -1])
+      cube([10, 22.5, 5.5]);
+    
+    // back left usb
+    translate([3, 3, -1])
       cube([10, 22.5, 5.5]);
     
     // right side slots
@@ -76,10 +80,5 @@ module body(switches) {
       cube([bodyBotOpeningX + 6, 6.2, 0.5]);
     }
   }
-  
-  *translate([5, -10, -5])
-    rotate([0, 180, 0])
-      rotate([-90, 0, 0])
-        import(file="espsx.stl");
   
 }
