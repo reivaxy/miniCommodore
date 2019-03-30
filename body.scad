@@ -21,28 +21,43 @@ module body(switches) {
       cube([bodyTopOpeningX, bodyTopOpeningY, 3]);
     }
 
-    // under keyboard bottom opening
+    // bottom opening
     translate([-bodyBotOpeningX/2, -bodyBotOpeningY/2 + 15, -5]) {
       cube([bodyBotOpeningX, bodyBotOpeningY - 15, 4]);
     }
 
     // Under keyboard: if no keyboard switches
-    if(switches < 0) {
+    if(switches < 1) {
       translate([-bodyBotOpeningX/2, -bodyBotOpeningY/2 + 1, -7.4]) {
-        rotate(14, [1, 0, 0]) {
+        rotate(13, [1, 0, 0]) {
           cube([bodyBotOpeningX, 15, 5]);
         }
       }
     } else {
-      // Remove key pad 
-      translate([11.8, -18.9, -8]) {
-        rotate(14, [1, 0, 0]) {
+      // Remove key pad: no longer 
+      *translate([11.8, -18.9, -8]) {
+        rotate(13, [1, 0, 0]) {
           cube([keyPadHoleX, keyPadHoleY, 10]);
         }
       }
+      // under key pad, keep thin wall, cut on both sides.
+      // after printing, cut top side to have a springy surface on which 
+      // the keypad can be stuck and action the switch below it
+      translate([11.8, -bodyBotOpeningY/2 + 1, -7.5]) {
+        rotate(13, [1, 0, 0]) {
+          cube([keyPadHoleX, keyPadHoleY, 5]);
+          translate([0, -0.15, 0]) {
+            cube([1, keyPadHoleY, 7]);
+          }
+          translate([keyPadHoleX-1, -0.15, 0]) {
+            cube([1, keyPadHoleY, 7]);
+          }
+        }
+      }
+
     // Remove main keyboard
       translate([-22.5, -15.6, -8]) {
-        rotate(14, [1, 0, 0]) {
+        rotate(13, [1, 0, 0]) {
           cube([keyboardHoleX, keyboardHoleY, 10]);
           // spacebar
           translate([5.6, -3.28, 0]) {
@@ -56,7 +71,7 @@ module body(switches) {
     *translate([-11.5, 3, -1])
       cube([10, 22.5, 5.5]);
     
-    // back left usb
+    // back right usb
     translate([3, 3, -1])
       cube([10, 22.5, 5.5]);
     
