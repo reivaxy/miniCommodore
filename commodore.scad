@@ -7,24 +7,34 @@ use <keyboard.scad>;
 
 difference() {
   translate([0, 0, 10]) {
-    frame = 1;  // 0: no frame, 1: frame only, 2: all
-    monitor(frame);
-    
+    frame = 0;  // 0: no frame, 1: frame only, 2: all
     switches = 1; // 0: no keyboard switches, 1: keyboard switches
-    *body(switches);
-    *base(switches);
-    *translate([-0, 0, 3.1])
-      rotate([13, 0, 0])
-        keyboard(switches);
+    print = 0;
     
-    *translate([21, -10, -5])
-      rotate([0, 180, 0])
-        rotate([-90, 0, 0])
+    
+    monitor(frame);     
+    body(switches);
+    base(switches);
+    translate([-0, 0, 4.8])
+      rotate([13, 0, 0])
+        keyboard(switches, print);
+    
+    *translate([-12.3, 23, 2.7])
+        rotate([90, 180, 90])
           import(file="esp.stl");
   }
-  *translate([-50, -7, 0])
+  
+  // Bottom cut view
+  *translate([-50, 10, 0])
+    cube([100, 100, 100]);
+  
+  // right cut view
+  *translate([0, -50, 0])
     cube([100, 100, 100]);
 }
+
+*screw();
+
 
 
 

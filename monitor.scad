@@ -4,7 +4,7 @@ use <oledPanel.scad>;
 
 // @param frame 0: no frame, 1: frame only, 2: all
 module monitor(frame) {
-  translate([0, -0.5, -4.5]) {
+  translate([0, -0.7, -4.5]) {
     difference() {
       scale([1.2, 1, 1.4]) {
           cube(0); // for frame == 1, need a node 
@@ -81,6 +81,16 @@ module monitor(frame) {
   }
   
   *screen1();
+  
+  // lower bottom open hinge to hold to body
+  translate([-15, 19.7, 9.5]) {
+    difference() {
+      cube([30, 2.5, 3]);
+      translate([0, 1, 1]) {
+        cube([30, 2.5, 1.1]);
+      }
+    }
+  }
 }
 
 module bottomLowerCorner() {

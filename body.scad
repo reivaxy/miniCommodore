@@ -34,24 +34,10 @@ module body(switches) {
         }
       }
     } else {
-      // Remove key pad: no longer 
-      *translate([11.8, -18.9, -8]) {
+      // Remove key pad 
+      translate([11.8, -18.9, -8]) {
         rotate(13, [1, 0, 0]) {
           cube([keyPadHoleX, keyPadHoleY, 10]);
-        }
-      }
-      // under key pad, keep thin wall, cut on both sides.
-      // after printing, cut top side to have a springy surface on which 
-      // the keypad can be stuck and action the switch below it
-      translate([11.8, -bodyBotOpeningY/2 + 1, -7.5]) {
-        rotate(13, [1, 0, 0]) {
-          cube([keyPadHoleX, keyPadHoleY, 5]);
-          translate([0, -0.15, 0]) {
-            cube([1, keyPadHoleY, 7]);
-          }
-          translate([keyPadHoleX-1, -0.15, 0]) {
-            cube([1, keyPadHoleY, 7]);
-          }
         }
       }
 
@@ -72,15 +58,30 @@ module body(switches) {
       cube([10, 22.5, 5.5]);
     
     // back right usb
-    translate([3, 3, -1])
+    *translate([3, 3, -1])
       cube([10, 22.5, 5.5]);
     
+    // right side usb
+    translate([20, 4.7, -1.2])
+      cube([5, 11, 5.5]);
+
+    // bottom cut along the esp board to free the connectors on the back side
+    // back right usb
+    translate([-5.5, 18, -3])
+      cube([25, 5, 3]);
+    
+    // right cut along the esp board to allow mounting
+    translate([17.5, -1, -3])
+      cube([5, 24, 3]);
+    
+    
     // right side slots
-    for (slot = [0 : 8]) {
+    *for (slot = [0 : 8]) {
       translate([21.5, 4 + slot*2, -1]) {
         cube([3, 1, 8]);
       }
     }
+    
     // left side slots
     for (slot = [0 : 8]) {
       translate([-24.5, 4 + slot*2, -1]) {
@@ -88,11 +89,47 @@ module body(switches) {
       }
     }
   }
-      
+  
+  // monitor fixation lug
+  translate([-16.2, 0, 0])
+    frontLug(2.5);
+  translate([16.2, 0, 0])
+    frontLug(2.5);
+  
+  // keypad spring blade 
+  translate([12.8, -20.9, -2.5]) {
+    cube([keyPadHoleX - 3 , keyPadHoleY, 1]);
+  }  
+  
   // Under top keyboard needs some reinforcement
   translate([-bodyBotOpeningX/2 - 3, -bodyBotOpeningY/2 + 13, 2.75]) {
     rotate(14, [1, 0, 0]) {
       cube([bodyBotOpeningX + 6, 6.2, 0.5]);
+    }
+  }
+  
+  // Center screw pillar
+  translate([-2.5, -6.3, -2.5]) {
+    difference() {
+      cube([screwPillarX, screwPillarY, 6.2]);
+      translate([screwPillarX/2, screwPillarY/2, 0]) {
+        screw(0);
+      }
+    }
+  }
+}
+
+module frontLug(width) {
+  translate([-width/2, 3.1, 11]) {
+    difference() {
+      cube([width, 0.9, 2]);
+      translate([0, -0.2, 0.1]) {
+        cube([width, 0.6, 1.5]);
+      }
+      translate([0, -0.9, 1.6]) {
+        rotate([-45, 0, 0])
+          cube([width, 0.6, 1.5]);
+      }
     }
   }
   

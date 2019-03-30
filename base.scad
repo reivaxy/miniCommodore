@@ -5,14 +5,33 @@ module base(switch) {
   scale([1.05, 1.05, 1]) {
     difference() {
       import(file="sources/base.stl");
-      scale([0.89, 0.92, 0.92]) {
+      scale([0.89, 0.92, 0.89]) {
         import(file="sources/base.stl");
+      }
+      translate([0, -4.45, -5.6]) {
+        screw(1);
       }
     }
   }
   if(switch == 1) {
     kbSupport();
   }
+  
+  // Center screw pillar
+  translate([0-2.5, -6.3, -5.5]) {
+    difference() {
+      cube([screwPillarX, screwPillarY, 3]);
+      translate([screwPillarX/2, screwPillarY/2, 0]) {
+        screw(1);
+      }
+    }    
+  }
+  
+  // esp bottom blocking pillar
+  translate([-14.5, 2, -5.5]) {
+    cube([2, 15, 8]);
+  }
+    
 }
 
 module kbSupport() {
@@ -66,12 +85,12 @@ module kbSupport() {
  }
  
   translate([3, -14.5, -7])  {
-    switchSupport(switchDownZ, switchFootZ);
+    switchSupport(switchDownZ, switchFootZ, 13);
     translate([-24.0, 0, 0])  {
-      switchSupport(switchDownZ, switchFootZ);
+      switchSupport(switchDownZ, switchFootZ, 13);
     }
-    translate([11.5, 0, 0])  {
-      switchSupport(switchDownZ, switchFootZ - 0.8);
+    translate([11, -1, 0])  {
+      switchSupport(switchDownZ, 4, 0);
     }
   }
   
@@ -81,9 +100,9 @@ switchFootZ = 6;
 pinX = 1.8;
 railSide = 2;
 
-module switchSupport(depth, height) {
+module switchSupport(depth, height, angle) {
   difference() {
-    rotate([13, 0, 0]) {
+    rotate([angle, 0, 0]) {
       straightSupport(depth, height);
     }
     // cut bottom
