@@ -88,13 +88,12 @@ module body(switches) {
         cube([3, 1, 8]);
       }
     }
+    
+    // Space for screen bottom lug
+    translate([-5.5, 3.3, 10]) {
+      cube([11, 0.9, 3]);
+    }
   }
-  
-  // monitor fixation lug
-  translate([-16.2, 0, 0])
-    frontLug(2.5);
-  translate([16.2, 0, 0])
-    frontLug(2.5);
   
   // keypad spring blade 
   translate([12.8, -20.9, -2.5]) {
@@ -117,20 +116,8 @@ module body(switches) {
       }
     }
   }
-}
-
-module frontLug(width) {
-  translate([-width/2, 3.1, 11]) {
-    difference() {
-      cube([width, 0.9, 2]);
-      translate([0, -0.2, 0.1]) {
-        cube([width, 0.6, 1.5]);
-      }
-      translate([0, -0.9, 1.6]) {
-        rotate([-45, 0, 0])
-          cube([width, 0.6, 1.5]);
-      }
-    }
-  }
   
+  translate([0, 23.2, -2])
+    cube([10, 1, 2]);
 }
+    

@@ -28,12 +28,24 @@ module base(switch) {
   }
   
   // esp bottom blocking pillar
-  translate([-14.5, 2, -5.5]) {
-    cube([2, 15, 8]);
+  translate([-12.8, 2, -5.5]) {
+    espBlocker();
+  }
+  translate([-12.8, 13, -5.5]) {
+    espBlocker();
   }
     
 }
 
+module espBlocker() {
+  cube([0.7, 5, 6]);
+  for (slot = [1 : 5]) {
+    translate([0, 0, slot]) {
+      rotate([0, 45, 0])
+        cube([1, 5, 1]);
+    }
+  }
+}
 module kbSupport() {
   supportDiam = kbAxisDiam + 0.2;
   supportSide = kbAxleSupportSide - kbAxisDiam;

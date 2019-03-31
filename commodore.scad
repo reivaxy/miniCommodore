@@ -9,17 +9,17 @@ difference() {
   translate([0, 0, 10]) {
     frame = 0;  // 0: no frame, 1: frame only, 2: all
     switches = 1; // 0: no keyboard switches, 1: keyboard switches
-    print = 0;
+    print = 1;
     
     
     monitor(frame);     
-    body(switches);
-    base(switches);
-    translate([-0, 0, 4.8])
+    *body(switches);
+    *base(switches);
+    *translate([-0, 0, 4.8])
       rotate([13, 0, 0])
-        keyboard(switches, print);
+        !keyboard(switches, print);
     
-    *translate([-12.3, 23, 2.7])
+    *translate([-11.3, 23, 2.7])
         rotate([90, 180, 90])
           import(file="esp.stl");
   }

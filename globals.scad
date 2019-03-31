@@ -8,7 +8,7 @@ bodyBotOpeningX = 40;
 bodyBotOpeningY = 40;
 
 monitorBotOpeningX = bodyTopOpeningX-1;
-monitorBotOpeningY = bodyTopOpeningY +1;
+monitorBotOpeningY = bodyTopOpeningY ;
 
 
 keyPadHoleX = 10.25;
@@ -19,11 +19,11 @@ keyboardHoleY = 10.25;
 spaceBarHoleX = 20.50;
 spaceBarHoleY = 3.28;
 
-keyPadX = keyPadHoleX -0.5 ;
-keyPadY = keyPadHoleY -0.5 ;
+keyPadX = keyPadHoleX -0.8 ;
+keyPadY = keyPadHoleY -0.8 ;
 
-keyboardX = keyboardHoleX - 1.5 ;
-keyboardY = keyboardHoleY -0.5 ;
+keyboardX = keyboardHoleX - 1.8 ;
+keyboardY = keyboardHoleY -0.8 ;
 spaceBarX = spaceBarHoleX -1 ;
 spaceBarY = spaceBarHoleY -0.5 ;
 
@@ -42,9 +42,9 @@ screwPillarX = 5;
 screwPillarY = 3.3;
 
 module screw(head) {
-  cylinder(d=1.2, h=8, $fn=80);
+  cylinder(d=1.3, h=8, $fn=80);
   if(head != 0) {
-    cylinder(d1=3.6, d2=1.2, h=1.3, $fn=80);
+    cylinder(d1=3.7, d2=1.2, h=1.4, $fn=80);
   }
   
 }

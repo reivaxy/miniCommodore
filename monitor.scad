@@ -56,7 +56,7 @@ module monitor(frame) {
           }
         }
       // bottom opening
-      translate([-monitorBotOpeningX/2, 13 - monitorBotOpeningY/2, 15]) {
+      translate([-monitorBotOpeningX/2, 13 - (monitorBotOpeningY -1)/2, 15]) {
         cube([monitorBotOpeningX, monitorBotOpeningY, 3]);
       }
                
@@ -91,6 +91,9 @@ module monitor(frame) {
       }
     }
   }
+  translate([0, -0.1, -1])
+    frontLug(10);
+   
 }
 
 module bottomLowerCorner() {
@@ -168,4 +171,24 @@ module slit(x) {
     cube([1, 10, 20]);
   translate([-0.3 - x, 18, 30])
     cube([1, 10, 20]);
+}
+
+module frontLug(width) {
+  translate([-width/2, 3.1, 11]) {
+    difference() {
+      cube([width, 0.9, 2]);
+      translate([-0.5, -0.3, 0.5]) {
+        cube([width+1, 0.7, 1.5]);
+      }
+      translate([-0.5, 0.3, -0.7]) {
+        rotate([45, 0, 0])
+          cube([width+1, 0.6, 1.5]);
+      }
+    }
+    translate([0, 0.4, 0.09]) {
+      rotate([-10, 0, 0])
+        cube([width, 0.5, 2]);
+    }
+  }
+  
 }
