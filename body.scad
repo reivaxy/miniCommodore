@@ -42,7 +42,7 @@ module body(switches) {
       }
 
     // Remove main keyboard
-      translate([-22.5, -15.6, -8]) {
+      translate([-22.5, -15.75, -8]) {
         rotate(13, [1, 0, 0]) {
           cube([keyboardHoleX, keyboardHoleY, 10]);
           // spacebar
@@ -94,6 +94,15 @@ module body(switches) {
       cube([11, 0.9, 3]);
     }
   }
+
+  // right keyboard spring blade 
+  translate([3.6, -20.9, -2.5]) {
+    cube([3.5 , keyPadHoleY, 1]);
+  } 
+  // left keyboard spring blade 
+  translate([-20.4, -20.9, -2.5]) {
+    cube([3.5 , keyPadHoleY, 1]);
+  } 
   
   // keypad spring blade 
   translate([12.8, -20.9, -2.5]) {

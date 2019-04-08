@@ -75,61 +75,22 @@ module pads(z) {
 module switchStuff(z) {
   difference() {
     union() {
-      pads(z);
-      translate([keyboardX + 3.7, -keySide - keyInterval + 0.2, 0]) {
-        cube([keyPadX, keyPadY, 4+2]);
+      // block below keypad
+      translate([keyboardX + 4.6, -keySide - keyInterval + 0.2, 0]) {
+        cube([keyPadX - 2.2, keyPadY - 0.8, 4+2]);
+      }      
+      // block below keyboard
+      translate([1.2, 0, 0]) {
+        cube([keyboardX - 2, keyboardY - 0.8, 4+2]);
       }      
     }
     // 
-    translate([keyboardX + 3.7, -keySide - keyInterval + 0.2, 2]) {
+    translate([-1, -keySide - keyInterval + 0.2, 1.9]) {
       rotate([13, 0, 0])
-      cube([keyPadX, keyPadY+2, 4]);
+      cube([keyPadX + keyboardX + 6, keyPadY+2, 4]);
     }
-    // Shorter
-    translate([keyboardX + 3.7, -keySide - keyInterval + 0.2 + keyPadY - 0.7, 0]) {
-      cube([keyPadX, 1, 5]);
-    }
-    // narrower
-    translate([keyboardX + 3.7 + keyPadX - 1.3, -keySide - keyInterval + 1  - 1, 0]) {
-      cube([1.3, keyPadY, 5]);
-    }      
-
   }
   translate([keyboardX / 2,  -3, 5.70]) {
-    rotate([-90, 0, 0]) {
-      difference() {
-        rotate([0, 0, 45]) {
-          difference() {
-            union() {
-              roundedSupport();
-              translate([0, 0, kbAxleSupportWidth+ kbAxleSupportSpacing]) {
-                roundedSupport();
-                translate([0, 0, kbAxleSupportWidth + kbAxleSupportSpacing]) {
-                  roundedSupport();
-                }
-              }
-              translate([kbAxisDiam/2, kbAxisDiam/2, 0]) {
-                cylinder(d=kbAxisDiam, h=(3*kbAxleSupportWidth + 2*kbAxleSupportSpacing), $fn=100);
-              }
-            }
-            // Cut upper half of pivot support
-            rotate([0, 0, 45]) {
-              translate([5, -7, -3]) {   // z, -x, -y
-                  cube([15, 15, 15]);    
-              }
-            }
-          }
-        }
-      }
-    }
   }
 }
 
-module roundedSupport() {
-  translate([kbAxisDiam/2, kbAxisDiam/2, 0])
-  minkowski() {
-    cube([kbAxleSupportSide - kbAxisDiam, kbAxleSupportSide - kbAxisDiam, kbAxleSupportWidth/2]);
-    cylinder(d=kbAxisDiam, h=kbAxleSupportWidth/2, $fn=100);
-  }
-  
-}

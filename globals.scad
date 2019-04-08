@@ -15,7 +15,7 @@ keyPadHoleX = 10.25;
 keyPadHoleY = 13.53;
 
 keyboardHoleX = 31.8;
-keyboardHoleY = 10.25;
+keyboardHoleY = 10.4;
 spaceBarHoleX = 20.50;
 spaceBarHoleY = 3.28;
 

@@ -12,10 +12,10 @@ difference() {
     print = 1;
     
     
-    monitor(frame);     
-    *body(switches);
+    *monitor(frame);     
+    body(switches);
     *base(switches);
-    *translate([-0, 0, 4.8])
+    *translate([-0, -0.6, 4.9])
       rotate([13, 0, 0])
         !keyboard(switches, print);
     
@@ -25,7 +25,7 @@ difference() {
   }
   
   // Bottom cut view
-  *translate([-50, 10, 0])
+  translate([-50, -6, 0])
     cube([100, 100, 100]);
   
   // right cut view
