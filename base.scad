@@ -48,18 +48,22 @@ module espBlocker() {
 }
 module kbSupport() {
   translate([3, -15.5, -7])  {
-
-    switchSupport(switchDownZ, switchFootZ, 0);
-    translate([-24.0, 0, 0])  {
+    
+    translate([-2.0, 0, 0]) {
       switchSupport(switchDownZ, switchFootZ, 0);
     }
+    translate([-22.0, 0, 0])  {
+      switchSupport(switchDownZ, switchFootZ, 0);
+    }
+    
+    // under keypad
     translate([11, 0, 0])  {
       switchSupport(switchDownZ, switchFootZ, 0);
     }
     // middle pivot
     translate([-10, 0, 2])  {
-      cube([2, 7, 2.5]);
-      translate([1, 0, 2.4]) {         
+      cube([2, 7, 1.5]);
+      translate([1, 0, 1.5]) {         
         rotate([-90, 0, 0]) {
           cylinder(d=2, h=7, $fn=90);
         }

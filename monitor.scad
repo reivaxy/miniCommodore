@@ -174,20 +174,20 @@ module slit(x) {
 }
 
 module frontLug(width) {
-  translate([-width/2, 3.1, 11]) {
+  translate([-width/2, 2.5, 11]) {
     difference() {
-      cube([width, 0.9, 2]);
-      translate([-0.5, -0.3, 0.5]) {
-        cube([width+1, 0.7, 1.5]);
+      cube([width, 1.5, 2]);
+      translate([-0.5, 0, 0.5]) {
+        #cube([width+1, 0.7, 1.5]);
       }
       translate([-0.5, 0.3, -0.7]) {
         rotate([45, 0, 0])
-          cube([width+1, 0.6, 1.5]);
+          #cube([width+1, 0.6, 1.5]);
       }
     }
-    translate([0, 0.4, 0.09]) {
+    translate([0, 1, 0.09]) {
       rotate([-10, 0, 0])
-        cube([width, 0.5, 2]);
+        cube([width, 0.6, 2]);
     }
   }
   

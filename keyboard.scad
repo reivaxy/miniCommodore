@@ -10,19 +10,7 @@ module keyboard(switch, print) {
   if(switch == 0) {
     paramKeyboard(4);
   } else {
-    paramKeyboard(2.3);
-    if(print) {
-      translate([-21.8, 0, 0]) {
-        switchStuff(4 - 2.5);
-      }
-    } else {
-      translate([-21.8, -17.3, 0]) {
-        rotate([180, 0, 0])
-        mirror([0, 1, 0]) {
-          switchStuff(4 - 2.5);
-        }
-      }
-    }
+    paramKeyboard(3);
   } 
 }
 
@@ -72,25 +60,5 @@ module pads(z) {
   }
 }
 
-module switchStuff(z) {
-  difference() {
-    union() {
-      // block below keypad
-      translate([keyboardX + 4.6, -keySide - keyInterval + 0.2, 0]) {
-        cube([keyPadX - 2.2, keyPadY - 0.8, 4+2]);
-      }      
-      // block below keyboard
-      translate([1.2, 0, 0]) {
-        cube([keyboardX - 2, keyboardY - 0.8, 4+2]);
-      }      
-    }
-    // 
-    translate([-1, -keySide - keyInterval + 0.2, 1.9]) {
-      rotate([13, 0, 0])
-      cube([keyPadX + keyboardX + 6, keyPadY+2, 4]);
-    }
-  }
-  translate([keyboardX / 2,  -3, 5.70]) {
-  }
-}
+
 

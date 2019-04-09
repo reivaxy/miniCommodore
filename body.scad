@@ -95,19 +95,40 @@ module body(switches) {
     }
   }
 
+
   // right keyboard spring blade 
-  translate([3.6, -20.9, -2.5]) {
-    cube([3.5 , keyPadHoleY, 1]);
+  translate([2.6, -15, -2.5]) {
+    cube([7 , 6, 0.45]);
   } 
   // left keyboard spring blade 
-  translate([-20.4, -20.9, -2.5]) {
-    cube([3.5 , keyPadHoleY, 1]);
-  } 
+  translate([-23, -15, -2.5]) {
+    cube([7, 6, 0.45]);
+  }
+  // Keyboard support
+  difference() {
+    translate([-16, -19, -2.5]) {
+      cube([keyboardX - 11, 10, 8]);
+    }  
+   translate([-16.5, -19, -1]) {
+      rotate([13, 0, 0])
+      cube([20, 15, 8]);
+    }    
+  }
   
   // keypad spring blade 
   translate([12.8, -20.9, -2.5]) {
     cube([keyPadHoleX - 3 , keyPadHoleY, 1]);
   }  
+  // Keypad support
+  difference() {
+    translate([13, -18, -2.5]) {
+      cube([keyPadX - 3, 9, 8]);
+    }  
+    translate([12, -19, -1]) {
+      rotate([13, 0, 0])
+      cube([20, 15, 8]);
+    }    
+  }
   
   // Under top keyboard needs some reinforcement
   translate([-bodyBotOpeningX/2 - 3, -bodyBotOpeningY/2 + 13, 2.75]) {
